@@ -1,3 +1,7 @@
+ // Oleh : 
+ //	Andhika Kurniawan
+ //	1817051027
+
 #include <iostream>
 #define MAX_STACK_SIZE 10
 using namespace std;
