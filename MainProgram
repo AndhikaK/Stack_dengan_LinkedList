@@ -1,0 +1,142 @@
+#include <iostream>
+#define MAX_STACK_SIZE 10
+using namespace std;
+
+struct nStack{
+	int data;
+	nStack *next;
+};
+
+nStack *head;
+
+void init(){
+	head = NULL;
+}
+
+bool isEmpty(){
+	return head == NULL;
+}
+
+bool isFull(){
+	if(isEmpty() == 1){
+		return 0;
+	}	else {
+		nStack *bantu;
+		int f;
+		bantu = head;
+		while (bantu != '\0'){
+			f++;
+			bantu = bantu->next;
+		}
+		return f > MAX_STACK_SIZE - 1;
+	}
+}
+
+class MyStack{
+    public:
+      int getTop(){
+    	return head->data;
+	  }
+    void push(int databaru){
+		  nStack *baru;
+  		baru = new nStack;
+  		baru->data = databaru;
+  		baru->next = NULL;
+  		if(isEmpty() == 1){
+  			baru->next = head;
+  			head = baru;
+  		}	else{
+		  	baru->next = head;
+	  		head=baru;
+		  }
+		  cout << "Nilai "<<getTop() << " masuk" << endl;
+	  }
+    void pop(){
+    	nStack *hapus;
+	  	int d;
+	  	hapus = head;
+	  	d = getTop();
+	  	head = head->next;
+	  	delete hapus;
+	  	cout << d << " terambil";
+     }
+};
+
+void printStackList(){
+   	nStack *bantu;
+		bantu = head;
+		int f = 0;
+		cout << "Isi stack : " << endl;
+		if (bantu == '\0'){
+	  		cout << "Stack kosong" << endl << endl;
+		} else {
+  			while(bantu != '\0'){
+ 				bantu = bantu->next;
+				f++;
+			}
+		bantu = head;
+		while(bantu != '\0'){
+				cout<<"|	"<<bantu->data<<"	|" << endl;
+				bantu = bantu->next;
+			}
+			cout << endl;
+			cout << "--------------------------------------------------------------------------------" << endl;
+		}
+} 
+
+
+
+void menu(){
+    char pilih;
+    int data;
+    MyStack s;
+
+    do{
+      	system("cls");
+      	
+      	cout << "================================================================================";
+      	cout << "			Stack dengan Linked List" << endl;
+      	cout << "================================================================================" << endl;
+      	
+      	printStackList();
+      	
+		cout << "Menu : " << endl;
+		cout << "  1. Push Stack " << endl;
+		cout << "  2. Pop Stack " << endl;
+		cout << "  3. Keluar " << endl;
+		cout << "Jawaban anda : ";
+      	cin >> pilih;
+      	cout << endl;
+
+      	switch(pilih){
+      		case '1' :
+      			if(isFull() == 0){
+      				cout << "Masukkan data : ";
+            		cin >> data;
+            		s.push(data);
+            		}
+				else
+					cout<<"Stack penuh!";
+				break;
+      		case '2' :
+      			if (isEmpty() == 0){
+				  	s.pop();
+      			}
+      			else
+      				cout << "Stack masih kosong!" << endl;
+            		break;
+      		case '3' :
+      			exit(0);
+            		break;
+      		default :
+            		cout<<"Pilih ulang"<<endl;
+      	}
+      	system ("pause");
+    }
+	while(pilih != 3);
+}
+
+int main(){
+    menu();
+    return 0;
+}
